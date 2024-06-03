@@ -366,6 +366,7 @@ $uvm = Start-VMInstance -vmName $vname
 if ($null -ne $uvm) {
     Write-Output "Please wait..."
     if (Get-VMHeartbeat -vmObject $uvm) {
+        Start-Sleep -Seconds 2
         $VMip = Get-VMIP -vmObject $uvm
         Write-Output "Loading..."
         while ($true) {
