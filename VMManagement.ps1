@@ -261,7 +261,14 @@ function Get-VMIP {
     $arpRes = arp -a
     $search = $arpRes | Select-String $temp
     $ipAddr = $search.ToString().Trim().Split()[0]
-    return $ipAddr
+    if ($null -ne  $ipAddr) {
+        return $ipAddr
+    }
+    else {
+        Start-Sleep -Seconds 2
+        return Get-VMIP -vmObject $vmObject
+    }
+    
 }
 
 # Function to stop a VM
